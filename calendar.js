@@ -1,4 +1,4 @@
-const ICAL_URL = "https://calendar.google.com/calendar/ical/ampureeves%40@gmail.com/public/basic.ics";
+const ICAL_URL = "https://calendar.google.com/calendar/ical/ampureeves%40gmail.com/public/basic.ics";
 
 const PROXY_URL =
   "https://api.allorigins.win/raw?url=" + encodeURIComponent(ICAL_URL);
