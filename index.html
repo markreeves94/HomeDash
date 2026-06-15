@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Home Dashboard</title>
+
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #101014;
+      color: white;
+      padding: 16px;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .dashboard {
+      height: calc(100vh - 32px);
+      display: grid;
+      grid-template-rows: 90px 1fr;
+      gap: 14px;
+    }
+
+    .topbar {
+      display: grid;
+      grid-template-columns: 100px repeat(4, 1fr);
+      gap: 12px;
+    }
+
+    .main {
+      display: grid;
+      grid-template-columns: 3fr 1fr;
+      gap: 14px;
+      min-height: 0;
+    }
+
+    .sidebar {
+      display: grid;
+      grid-template-rows: 1fr 1fr 1fr;
+      gap: 14px;
+      min-height: 0;
+    }
+
+    .card {
+      background: #1c1c24;
+      border-radius: 18px;
+      padding: 16px;
+      overflow: hidden;
+      box-shadow: 0 8px 22px rgba(0,0,0,0.25);
+    }
+
+    .clock {
+      font-size: 2rem;
+      font-weight: bold;
+    }
+
+    .small-label {
+      color: #aaa;
+      font-size: 0.9rem;
+      margin-bottom: 6px;
+    }
+
+    h2 {
+      margin: 0 0 14px;
+      font-size: 1.5rem;
+    }
+
+    .weather-temp {
+      font-size: 1.25rem;
+      font-weight: bold;
+    }
+
+    .weather-text,
+    .day-text {
+      color: #bbb;
+      font-size: 0.95rem;
+    }
+
+    .calendar-card {
+      min-height: 0;
+    }
+
+    .event, .task {
+      background: #2a2a35;
+      border-radius: 12px;
+      padding: 12px;
+      margin-bottom: 10px;
+    }
+
+    .time {
+      color: #7dd3fc;
+      font-weight: bold;
+      font-size: 0.95rem;
+    }
+
+    .title {
+      margin-top: 4px;
+      font-size: 1.05rem;
+    }
+
+    @media (max-width: 900px) {
+      .topbar {
+        grid-template-columns: 1fr 1fr;
+        grid-auto-rows: 90px;
+      }
+
+      .main {
+        grid-template-columns: 1fr;
+      }
+
+      body {
+        overflow: auto;
+      }
+
+      .dashboard {
+        height: auto;
+      }
+    }
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 10px;
+  height: calc(100% - 45px);
+}
+
+.day {
+  background: #2a2a35;
+  border-radius: 12px;
+  padding: 10px;
+}
+
+.day strong {
+  color: #7dd3fc;
+  display: block;
+  margin-bottom: 8px;
+}
+.calendar-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.calendar-title-row h2 {
+  margin: 0;
+}
+
+.calendar-title-row span {
+  color: #aaa;
+  font-size: 0.9rem;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="dashboard">
+
+    <div class="topbar">
+      <div class="card">
+        <div class="small-label">Time</div>
+        <div class="clock" id="clock">--:--</div>
+      </div>
+
+      <div class="card">
+        <div class="small-label">Weather</div>
+        <div class="weather-temp">12°C</div>
+        <div class="weather-text">Mostly cloudy</div>
+      </div>
+
+      <div class="card">
+        <div class="small-label">Day 1</div>
+        <div class="weather-temp">13°C</div>
+        <div class="day-text">Cloudy</div>
+      </div>
+
+      <div class="card">
+        <div class="small-label">Day 2</div>
+        <div class="weather-temp">11°C</div>
+        <div class="day-text">Rain</div>
+      </div>
+
+      <div class="card">
+        <div class="small-label">Day 3</div>
+        <div class="weather-temp">15°C</div>
+        <div class="day-text">Sunny spells</div>
+      </div>
+    </div>
+
+    <div class="main">
+      <div class="card calendar-card">
+ <div class="calendar-title-row">
+  <h2 id="monthTitle">Calendar</h2>
+  <span>Next 2 weeks</span>
+</div>
+
+
+  <div class="calendar-grid">
+    <div class="day"><strong>Mon 15</strong><p>09:00 Example event</p></div>
+    <div class="day"><strong>Tue 16</strong><p>No events</p></div>
+    <div class="day"><strong>Wed 17</strong><p>13:30 Another event</p></div>
+    <div class="day"><strong>Thu 18</strong><p>No events</p></div>
+    <div class="day"><strong>Fri 19</strong><p>No events</p></div>
+    <div class="day"><strong>Sat 20</strong><p>No events</p></div>
+    <div class="day"><strong>Sun 21</strong><p>No events</p></div>
+
+    <div class="day"><strong>Mon 22</strong><p>No events</p></div>
+    <div class="day"><strong>Tue 23</strong><p>No events</p></div>
+    <div class="day"><strong>Wed 24</strong><p>No events</p></div>
+    <div class="day"><strong>Thu 25</strong><p>No events</p></div>
+    <div class="day"><strong>Fri 26</strong><p>No events</p></div>
+    <div class="day"><strong>Sat 27</strong><p>No events</p></div>
+    <div class="day"><strong>Sun 28</strong><p>No events</p></div>
+  </div>
+</div>
+
+      <div class="sidebar">
+        <div class="card">
+          <h2>Tasks today</h2>
+          <div class="task"><div class="title">☐ Example task</div></div>
+        </div>
+
+        <div class="card">
+          <h2>Tasks this week</h2>
+          <div class="task"><div class="title">☐ Example task</div></div>
+        </div>
+
+        <div class="card">
+          <h2>Tasks for later</h2>
+          <div class="task"><div class="title">☐ Example task</div></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    function updateClock() {
+      const now = new Date();
+
+      document.getElementById("clock").textContent =
+        now.toLocaleTimeString("en-GB", {
+          hour: "2-digit",
+          minute: "2-digit"
+        });
+    }
+
+    updateClock();
+    setInterval(updateClock, 1000);
+  </script>
+<script scr="calendar.js"></script>
+</body>
+</html>
