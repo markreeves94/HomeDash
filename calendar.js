@@ -1,3 +1,4 @@
+console.log("calendar.js started");
 const CALENDAR_API_URL = "https://script.google.com/macros/s/AKfycbwHEY0UNqvGxTNkEB56-TG1QZa_miDZ7lhKWmkHmE3u7Cetzty1WgvaKP6Z4gK0z5or/exec";
 
 async function loadCalendar() {
