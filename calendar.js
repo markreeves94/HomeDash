@@ -4,8 +4,7 @@ const PROXY_URL =
   "https://api.allorigins.win/raw?url=" + encodeURIComponent(ICAL_URL);
 
 async function loadCalendar() {
-  const response = await fetch(PROXY_URL);
-  const icsText = await response.text();
+alert("loadCalendar started");
 
   const events = parseICS(icsText);
   renderTwoWeekCalendar(events);
