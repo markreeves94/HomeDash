@@ -314,64 +314,6 @@ async function loadCalendar() {
 
                     const p = document.createElement("p");
 
-                    <script>
-const CALENDAR_API_URL = "PASTE_YOUR_GOOGLE_SCRIPT_URL_HERE";
-
-async function loadCalendar() {
-    try {
-        console.log("Loading calendar...");
-
-        const response = await fetch(CALENDAR_API_URL);
-        const events = await response.json();
-
-        console.log(events);
-
-        const grid = document.querySelector(".calendar-grid");
-
-        if (!grid) {
-            console.error("calendar-grid not found");
-            return;
-        }
-
-        grid.innerHTML = "";
-
-        const today = new Date();
-        today.setHours(0,0,0,0);
-
-        for (let i = 0; i < 14; i++) {
-
-            const date = new Date(today);
-            date.setDate(today.getDate() + i);
-
-            const dayEvents = events.filter(event => {
-                const eventDate = new Date(event.start);
-                return eventDate.toDateString() === date.toDateString();
-            });
-
-            const dayBox = document.createElement("div");
-            dayBox.className = "day";
-
-            const heading = document.createElement("strong");
-            heading.textContent =
-                date.toLocaleDateString("en-GB", {
-                    weekday: "short",
-                    day: "numeric"
-                });
-
-            dayBox.appendChild(heading);
-
-            if (dayEvents.length === 0) {
-
-                const p = document.createElement("p");
-                p.textContent = "No events";
-                dayBox.appendChild(p);
-
-            } else {
-
-                dayEvents.forEach(event => {
-
-                    const p = document.createElement("p");
-
                     p.textContent =
                         new Date(event.start)
                         .toLocaleTimeString("en-GB", {
@@ -380,23 +322,6 @@ async function loadCalendar() {
                         })
                         + " " +
                         event.title;
-
-                    dayBox.appendChild(p);
-
-                });
-
-            }
-
-            grid.appendChild(dayBox);
-        }
-
-    } catch (err) {
-        console.error(err);
-    }
-}
-
-loadCalendar();
-</script>
 
                     dayBox.appendChild(p);
 
