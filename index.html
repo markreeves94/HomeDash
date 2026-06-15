@@ -254,14 +254,14 @@
     setInterval(updateClock, 1000);
   </script>
 <script>
-  console.log("inline test works");
 </script>
 <script>
 const CALENDAR_API_URL = "https://script.google.com/macros/s/AKfycbwHEY0UNqvGxTNkEB56-TG1QZa_miDZ7lhKWmkHmE3u7Cetzty1WgvaKP6Z4gK0z5or/exec";
 
 async function loadCalendar() {
     try {
-        console.log("Loading calendar...");
+
+  
 
         const response = await fetch(CALENDAR_API_URL);
         const events = await response.json();
