@@ -47,21 +47,28 @@ function renderTwoWeekCalendar(events) {
      empty.textContent = "No events";
      dayBox.appendChild(empty);
    } else {
-     dayEvents.forEach(event => {
-       const p = document.createElement("p");
-       const time = new Date(event.start).toLocaleTimeString("en-GB", {
-         hour: "2-digit",
-         minute: "2-digit"
-       });
+    dayEvents.forEach(event => {
+    const p = document.createElement("p");
 
-       p.textContent = `${time} ${event.title}`;
-       dayBox.appendChild(p);
-     });
+    if (event.allDay) {
+        p.textContent = event.title;
+    } else {
+        const time = new Date(event.start).toLocaleTimeString("en-GB", {
+            hour: "2-digit",
+            minute: "2-digit"
+        });
+
+        p.textContent = `${time} ${event.title}`;
+    }
+
+    dayBox.appendChild(p);
+});
+
    }
 
    grid.appendChild(dayBox);
  }
-}
+}Fday
 
 loadCalendar();
 setInterval(loadCalendar, 10 * 60 * 1000);
