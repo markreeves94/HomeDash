@@ -1,6 +1,25 @@
 console.log("calendar.js started");
 const CALENDAR_API_URL = "https://script.google.com/macros/s/AKfycbwHEY0UNqvGxTNkEB56-TG1QZa_miDZ7lhKWmkHmE3u7Cetzty1WgvaKP6Z4gK0z5or/exec";
 
+function getGoogleColor(colorId) {
+  const colors = {
+    "1": "#7986CB",
+    "2": "#33B679",
+    "3": "#8E24AA",
+    "4": "#E67C73",
+    "5": "#F6BF26",
+    "6": "#F4511E",
+    "7": "#039BE5",
+    "8": "#616161",
+    "9": "#3F51B5",
+    "10": "#0B8043",
+    "11": "#D50000"
+  };
+
+  return colors[colorId] || "#666";
+}
+
+
 async function loadCalendar() {
   try {
     console.log("Loading calendar...");
@@ -49,6 +68,9 @@ function renderTwoWeekCalendar(events) {
    } else {
     dayEvents.forEach(event => {
     const p = document.createElement("p");
+    p.style.borderLeft = `4px solid ${getGoogleColor(event.color)}`;
+p.style.paddingLeft = "6px";
+      
 
     if (event.allDay) {
         p.textContent = event.title;
