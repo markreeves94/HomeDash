@@ -255,7 +255,7 @@ function getGoogleColor(colorId) {
     "11": "#D50000"
   };
 
-  return colors[colorId] || "#666";
+  return colors[String(colorId).trim()] || "#4FC3F7";
 }
 async function loadCalendar() {
     try {
