@@ -314,14 +314,17 @@ async function loadCalendar() {
 
                     const p = document.createElement("p");
 
-                    p.textContent =
-                        new Date(event.start)
-                        .toLocaleTimeString("en-GB", {
-                            hour: "2-digit",
-                            minute: "2-digit"
-                        })
-                        + " " +
-                        event.title;
+                    if (event.allDay) {
+    p.textContent = event.title;
+} else {
+    p.textContent =
+        new Date(event.start).toLocaleTimeString("en-GB", {
+            hour: "2-digit",
+            minute: "2-digit"
+        }) +
+        " " +
+        event.title;
+}
 
                     dayBox.appendChild(p);
 
