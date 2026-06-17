@@ -61,11 +61,7 @@ function renderTwoWeekCalendar(events) {
 
    dayBox.appendChild(heading);
 
-   if (dayEvents.length === 0) {
-     const empty = document.createElement("p");
-     empty.textContent = "No events";
-     dayBox.appendChild(empty);
-   } else {
+   if (dayEvents.length > 0) {
     dayEvents.forEach(event => {
     const p = document.createElement("p");
     p.style.borderLeft = `4px solid ${getGoogleColor(event.color)}`;
