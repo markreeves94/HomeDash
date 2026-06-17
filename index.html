@@ -302,7 +302,7 @@ async function loadCalendar() {
 
             dayBox.appendChild(heading);
 
-            if (dayEvents.length === 0) {
+            if (dayEvents.length > 0) {
                 dayEvents.forEach(event => {
 
                     const p = document.createElement("p");
