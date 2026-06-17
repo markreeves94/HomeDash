@@ -303,13 +303,6 @@ async function loadCalendar() {
             dayBox.appendChild(heading);
 
             if (dayEvents.length === 0) {
-
-                const p = document.createElement("p");
-                p.textContent = "No events";
-                dayBox.appendChild(p);
-
-            } else {
-
                 dayEvents.forEach(event => {
 
                     const p = document.createElement("p");
