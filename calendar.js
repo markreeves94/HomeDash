@@ -33,6 +33,8 @@ async function loadCalendar() {
   }
 }
 }
+loadCalendar();
+setInterval(loadCalendar, 10 * 60 * 1000);
 
 function renderTwoWeekCalendar(events) {
  const grid = document.querySelector(".calendar-grid");
