@@ -305,8 +305,12 @@ async function loadCalendar() {
                 dayEvents.forEach(event => {
 
                     const p = document.createElement("p");
-p.style.borderLeft = `4px solid ${getGoogleColor(event.color)}`;
-p.style.paddingLeft = "6px";
+p.style.backgroundColor = getGoogleColor(event.color);
+p.style.color = "#fff";
+p.style.padding = "6px 8px";
+p.style.borderRadius = "6px";
+p.style.display = "block";
+p.style.margin = "4px 0";
                     if (event.allDay) {
     p.textContent = event.title;
 } else {
