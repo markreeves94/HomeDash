@@ -293,9 +293,17 @@ async function loadCalendar() {
             date.setDate(today.getDate() + i);
 
             const dayEvents = events.filter(event => {
-                const eventDate = new Date(event.start);
-                return eventDate.toDateString() === date.toDateString();
-            });
+    const start = new Date(event.start);
+    const end = new Date(event.end);
+
+    const dayStart = new Date(date);
+    dayStart.setHours(0, 0, 0, 0);
+
+    const dayEnd = new Date(date);
+    dayEnd.setHours(23, 59, 59, 999);
+
+    return start <= dayEnd && end > dayStart;
+});
 
             const dayBox = document.createElement("div");
             dayBox.className = "day";
