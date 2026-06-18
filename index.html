@@ -313,7 +313,9 @@ async function loadCalendar() {
                 dayEvents.forEach(event => {
 
                     const p = document.createElement("p");
-p.style.backgroundColor = getGoogleColor(event.color);
+const colour = getGoogleColor(event.color);
+p.style.backgroundColor = colour;
+p.style.setProperty("background-color", colour, "important");
 p.style.color = "#fff";
 p.style.padding = "6px 8px";
 p.style.borderRadius = "6px";
