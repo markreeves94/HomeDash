@@ -314,6 +314,9 @@ async function loadCalendar() {
 
                     const p = document.createElement("p");
 const colour = getGoogleColor(event.color);
+
+console.log(event.title, event.color, Colour);                   
+                  
 p.style.backgroundColor = colour;
 p.style.setProperty("background-color", colour, "important");
 p.style.color = "#fff";
