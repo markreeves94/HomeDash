@@ -77,16 +77,25 @@
       font-size: 1.5rem;
     }
 
-    .weather-temp {
-      font-size: 1.25rem;
-      font-weight: bold;
-    }
+   .weather-temp {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
 
-    .weather-text,
-    .day-text {
-      color: #bbb;
-      font-size: 0.95rem;
-    }
+.weather-text {
+  color: #bbb;
+  font-size: 0.85rem;
+}
+
+.weather-icon {
+  font-size: 1.4rem;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.weather-alert {
+  box-shadow: 0 0 0 2px rgba(246, 191, 38, 0.65);
+}
 
     .calendar-card {
       min-height: 0;
@@ -175,20 +184,23 @@
     <div class="small-label">Time</div>
     <div class="clock" id="clock">--:--</div>
   </div>
-     <div class="card">
-  <div class="small-label" id="weather-label-0">Weather</div>
+   <div class="card weather-card" id="weather-card-0">
+  <div class="small-label" id="weather-label-0">Today</div>
+  <div class="weather-icon" id="weather-icon-0"></div>
   <div class="weather-temp" id="weather-temp-0">--°C</div>
   <div class="weather-text" id="weather-text-0">Loading...</div>
 </div>
 
-<div class="card">
+<div class="card weather-card" id="weather-card-1">
   <div class="small-label" id="weather-label-1">Tomorrow</div>
+  <div class="weather-icon" id="weather-icon-1"></div>
   <div class="weather-temp" id="weather-temp-1">--°C</div>
   <div class="weather-text" id="weather-text-1">Loading...</div>
 </div>
 
-<div class="card">
+<div class="card weather-card" id="weather-card-2">
   <div class="small-label" id="weather-label-2">Day After</div>
+  <div class="weather-icon" id="weather-icon-2"></div>
   <div class="weather-temp" id="weather-temp-2">--°C</div>
   <div class="weather-text" id="weather-text-2">Loading...</div>
 </div>
@@ -364,51 +376,59 @@ const WEATHER_LAT = 52.52;
 const WEATHER_LON = -1.90;
 
 const weatherCodes = {
-  0: "Clear",
-  1: "Mainly clear",
-  2: "Partly cloudy",
-  3: "Cloudy",
-  45: "Fog",
-  48: "Fog",
-  51: "Drizzle",
-  53: "Drizzle",
-  55: "Drizzle",
-  61: "Rain",
-  63: "Rain",
-  65: "Heavy rain",
-  71: "Snow",
-  73: "Snow",
-  75: "Heavy snow",
-  80: "Showers",
-  81: "Showers",
-  82: "Heavy showers",
-  95: "Thunderstorm"
+  0: { text: "Clear", icon: "☼" },
+  1: { text: "Mainly clear", icon: "☼" },
+  2: { text: "Partly cloudy", icon: "☁" },
+  3: { text: "Cloudy", icon: "☁" },
+  45: { text: "Fog", icon: "≋" },
+  48: { text: "Fog", icon: "≋" },
+  51: { text: "Drizzle", icon: "⋰" },
+  53: { text: "Drizzle", icon: "⋰" },
+  55: { text: "Drizzle", icon: "⋰" },
+  61: { text: "Rain", icon: "│" },
+  63: { text: "Rain", icon: "│" },
+  65: { text: "Heavy rain", icon: "│" },
+  71: { text: "Snow", icon: "*" },
+  73: { text: "Snow", icon: "*" },
+  75: { text: "Heavy snow", icon: "*" },
+  80: { text: "Showers", icon: "│" },
+  81: { text: "Showers", icon: "│" },
+  82: { text: "Heavy showers", icon: "│" },
+  95: { text: "Thunderstorm", icon: "⚡" }
 };
+
+function isWeatherAlert(code) {
+  return [65, 75, 82, 95].includes(code);
+}
 
 async function loadWeather() {
   try {
     const url =
-      `https://api.open-meteo.com/v1/forecast?latitude=${WEATHER_LAT}&longitude=${WEATHER_LON}&current=temperature_2m,weather_code&daily=temperature_2m_max,weather_code&timezone=auto`;
+      `https://api.open-meteo.com/v1/forecast?latitude=${WEATHER_LAT}&longitude=${WEATHER_LON}&current=temperature_2m,weather_code&daily=temperature_2m_max,temperature_2m_min,weather_code&timezone=auto`;
 
     const response = await fetch(url);
     const data = await response.json();
 
-    const temps = [
-      Math.round(data.current.temperature_2m),
-      Math.round(data.daily.temperature_2m_max[1]),
-      Math.round(data.daily.temperature_2m_max[2])
-    ];
-
-    const codes = [
-      data.current.weather_code,
-      data.daily.weather_code[1],
-      data.daily.weather_code[2]
-    ];
+    const labels = ["Today", "Tomorrow", "Day After"];
 
     for (let i = 0; i < 3; i++) {
-      document.getElementById(`weather-temp-${i}`).textContent = `${temps[i]}°C`;
-      document.getElementById(`weather-text-${i}`).textContent =
-        weatherCodes[codes[i]] || "Weather";
+      const code = i === 0 ? data.current.weather_code : data.daily.weather_code[i];
+      const temp = i === 0
+        ? Math.round(data.current.temperature_2m)
+        : Math.round(data.daily.temperature_2m_max[i]);
+
+      const high = Math.round(data.daily.temperature_2m_max[i]);
+      const low = Math.round(data.daily.temperature_2m_min[i]);
+
+      const weather = weatherCodes[code] || { text: "Weather", icon: "" };
+
+      document.getElementById(`weather-label-${i}`).textContent = labels[i];
+      document.getElementById(`weather-icon-${i}`).textContent = weather.icon;
+      document.getElementById(`weather-temp-${i}`).textContent = `${temp}°C`;
+      document.getElementById(`weather-text-${i}`).textContent = `H:${high}° L:${low}°`;
+
+      const card = document.getElementById(`weather-card-${i}`);
+      card.classList.toggle("weather-alert", isWeatherAlert(code));
     }
   } catch (error) {
     console.error("Weather error:", error);
