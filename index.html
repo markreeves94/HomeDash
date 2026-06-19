@@ -256,6 +256,7 @@
 <script>
 </script>
 <script>
+  const TASKS_API_URL = "PASTE_YOUR_TASKS_EXEC_URL_HERE";
 const CALENDAR_API_URL = "https://script.google.com/macros/s/AKfycbxzkfl9PK09uKR9bgSBGiTQqLhpKJqG7T9wk_FPN8dPcRhrHjdFwrn51U3FhllGLSQ/exec"
 
 
@@ -431,4 +432,31 @@ document.getElementById(`weather-text-${i}`).textContent = weather.text;
 
 loadWeather();
 setInterval(loadWeather, 30 * 60 * 1000);
+  async function loadTasks() {
+  try {
+    const response = await fetch(TASKS_API_URL);
+    const data = await response.json();
+
+    populateTaskList("tasks-today", data.today);
+    populateTaskList("tasks-week", data.week);
+    populateTaskList("tasks-later", data.later);
+  } catch (error) {
+    console.error("Tasks error:", error);
+  }
+}
+
+function populateTaskList(id, tasks) {
+  const container = document.getElementById(id);
+  container.innerHTML = "";
+
+  tasks.forEach(task => {
+    const div = document.createElement("div");
+    div.className = "task";
+    div.innerHTML = `<div class="title">☐ ${task.title}</div>`;
+    container.appendChild(div);
+  });
+}
+
+loadTasks();
+setInterval(loadTasks, 5 * 60 * 1000);
 </script>
