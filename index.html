@@ -411,7 +411,7 @@ async function loadWeather() {
 
       const high = Math.round(data.daily.temperature_2m_max[i]);
       const low = Math.round(data.daily.temperature_2m_min[i]);
-
+console.log("HIGH", HIGH, "LOW", LOW);
       const weather = weatherCodes[code] || { text: "Weather", icon: "" };
 
       document.getElementById(`weather-label-${i}`).textContent = labels[i];
