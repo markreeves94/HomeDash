@@ -354,6 +354,64 @@ p.style.margin = "4px 0";
 
 loadCalendar();
 </script>
+<script>
+const WEATHER_LAT = 52.52;
+const WEATHER_LON = -1.90;
+
+const weatherCodes = {
+  0: "Clear",
+  1: "Mainly clear",
+  2: "Partly cloudy",
+  3: "Cloudy",
+  45: "Fog",
+  48: "Fog",
+  51: "Drizzle",
+  53: "Drizzle",
+  55: "Drizzle",
+  61: "Rain",
+  63: "Rain",
+  65: "Heavy rain",
+  71: "Snow",
+  73: "Snow",
+  75: "Heavy snow",
+  80: "Showers",
+  81: "Showers",
+  82: "Heavy showers",
+  95: "Thunderstorm"
+};
+
+async function loadWeather() {
+  try {
+    const url =
+      `https://api.open-meteo.com/v1/forecast?latitude=${WEATHER_LAT}&longitude=${WEATHER_LON}&current=temperature_2m,weather_code&daily=temperature_2m_max,weather_code&timezone=auto`;
+
+    const response = await fetch(url);
+    const data = await response.json();
+
+    const temps = [
+      Math.round(data.current.temperature_2m),
+      Math.round(data.daily.temperature_2m_max[1]),
+      Math.round(data.daily.temperature_2m_max[2])
+    ];
+
+    const codes = [
+      data.current.weather_code,
+      data.daily.weather_code[1],
+      data.daily.weather_code[2]
+    ];
+
+    for (let i = 0; i < 3; i++) {
+      document.getElementById(`weather-temp-${i}`).textContent = `${temps[i]}°C`;
+      document.getElementById(`weather-text-${i}`).textContent =
+        weatherCodes[codes[i]] || "Weather";
+    }
+  } catch (error) {
+    console.error("Weather error:", error);
+  }
+}
+
+loadWeather();
+setInterval(loadWeather, 30 * 60 * 1000);
 </script>
 </body>
 </html>
