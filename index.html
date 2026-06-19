@@ -376,25 +376,16 @@ const WEATHER_LAT = 52.52;
 const WEATHER_LON = -1.90;
 
 const weatherCodes = {
-  0: { text: "Clear", icon: "☼" },
-  1: { text: "Mainly clear", icon: "☼" },
-  2: { text: "Partly cloudy", icon: "☁" },
-  3: { text: "Cloudy", icon: "☁" },
-  45: { text: "Fog", icon: "≋" },
-  48: { text: "Fog", icon: "≋" },
-  51: { text: "Drizzle", icon: "⋰" },
-  53: { text: "Drizzle", icon: "⋰" },
-  55: { text: "Drizzle", icon: "⋰" },
-  61: { text: "Rain", icon: "│" },
-  63: { text: "Rain", icon: "│" },
-  65: { text: "Heavy rain", icon: "│" },
-  71: { text: "Snow", icon: "*" },
-  73: { text: "Snow", icon: "*" },
-  75: { text: "Heavy snow", icon: "*" },
-  80: { text: "Showers", icon: "│" },
-  81: { text: "Showers", icon: "│" },
-  82: { text: "Heavy showers", icon: "│" },
-  95: { text: "Thunderstorm", icon: "⚡" }
+0:  { text: "Clear", icon: "☀️" },
+1:  { text: "Mainly clear", icon: "☀️" },
+2:  { text: "Partly cloudy", icon: "⛅" },
+3:  { text: "Cloudy", icon: "☁️" },
+51: { text: "Drizzle", icon: "🌦️" },
+61: { text: "Rain", icon: "🌧️" },
+65: { text: "Heavy rain", icon: "🌧️" },
+71: { text: "Snow", icon: "❄️" },
+80: { text: "Showers", icon: "🌦️" },
+95: { text: "Thunderstorm", icon: "⛈️" }
 };
 
 function isWeatherAlert(code) {
