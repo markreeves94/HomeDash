@@ -419,8 +419,8 @@ async function loadWeather() {
 
       document.getElementById(`weather-label-${i}`).textContent = labels[i];
 document.getElementById(`weather-icon-${i}`).textContent = weather.icon;
-document.getElementById(`weather-temp-${i}`).textContent =
-  `${temp}° ↑${high}° ↓${low}°`;
+document.getElementById(`weather-temp-${i}`).innerHTML =
+  `${temp}°<br><span style="font-size:0.7em">${high}° / ${low}°</span>`;
 document.getElementById(`weather-text-${i}`).textContent = weather.text;
     }
   } catch (error) {
