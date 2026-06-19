@@ -26,7 +26,30 @@
     grid-template-rows: 90px 1fr;
     gap: 14px;
 }
+.task {
+  background: #2a2a35;
+  border-radius: 12px;
+  padding: 10px 12px;
+  margin-bottom: 8px;
+}
 
+.task-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.task-circle {
+  width: 14px;
+  height: 14px;
+  border: 2px solid #bbb;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.task-title {
+  font-size: 0.95rem;
+}
 .topbar {
     grid-column: 1;
     grid-row: 1;
