@@ -254,8 +254,6 @@
     setInterval(updateClock, 1000);
   </script>
 <script>
-</script>
-<script>
   const TASKS_API_URL = "https://script.google.com/macros/s/AKfycbzGgoNU-_1EkGDbfmYDZwhVmCPL4I-BIBRMEFT7N4gmLY_jUTVM5awqFCJTU3VECfbzwQ/exec";
 const CALENDAR_API_URL = "https://script.google.com/macros/s/AKfycbxzkfl9PK09uKR9bgSBGiTQqLhpKJqG7T9wk_FPN8dPcRhrHjdFwrn51U3FhllGLSQ/exec"
 
@@ -375,7 +373,7 @@ loadCalendar();
 </script>
 <script>
 const WEATHER_LAT = 51.3420;
-const WEATHER_LON = -0.7350;
+const WEATHER_LON = 0.7350;
 
 const weatherCodes = {
   0: { icon: "☀️", text: "Clear" },
@@ -452,7 +450,12 @@ function populateTaskList(id, tasks) {
   tasks.forEach(task => {
     const div = document.createElement("div");
     div.className = "task";
-    div.innerHTML = `<div class="title">☐ ${task.title}</div>`;
+   div.innerHTML = `
+  <div class="task-row">
+    <span class="task-circle"></span>
+    <span class="task-title">${task.title}</span>
+  </div>
+`;
     container.appendChild(div);
   });
 }
@@ -460,3 +463,5 @@ function populateTaskList(id, tasks) {
 loadTasks();
 setInterval(loadTasks, 5 * 60 * 1000);
 </script>
+</body>
+</html>
