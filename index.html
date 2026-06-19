@@ -376,27 +376,30 @@ const WEATHER_LAT = 52.52;
 const WEATHER_LON = -1.90;
 
 const weatherCodes = {
-0:  { text: "Clear", icon: "☀️" },
-1:  { text: "Mainly clear", icon: "☀️" },
-2:  { text: "Partly cloudy", icon: "⛅" },
-3:  { text: "Cloudy", icon: "☁️" },
-51: { text: "Drizzle", icon: "🌦️" },
-61: { text: "Rain", icon: "🌧️" },
-65: { text: "Heavy rain", icon: "🌧️" },
-71: { text: "Snow", icon: "❄️" },
-80: { text: "Showers", icon: "🌦️" },
-95: { text: "Thunderstorm", icon: "⛈️" }
+  0: "☀️",
+  1: "☀️",
+  2: "⛅",
+  3: "☁️",
+  45: "🌫️",
+  48: "🌫️",
+  51: "🌦️",
+  53: "🌦️",
+  55: "🌦️",
+  61: "🌧️",
+  63: "🌧️",
+  65: "🌧️",
+  71: "❄️",
+  73: "❄️",
+  75: "❄️",
+  80: "🌦️",
+  81: "🌦️",
+  82: "🌧️",
+  95: "⛈️"
 };
-
-function isWeatherAlert(code) {
-  return [65, 75, 82, 95].includes(code);
-}
 
 async function loadWeather() {
   try {
-
-    const url =
-  `https://api.open-meteo.com/v1/forecast?latitude=${WEATHER_LAT}&longitude=${WEATHER_LON}&current=temperature_2m,weather_code&daily=temperature_2m_max,temperature_2m_min,weather_code&timezone=auto`;
+    const url = `https://api.open-meteo.com/v1/forecast?latitude=${WEATHER_LAT}&longitude=${WEATHER_LON}&current=temperature_2m,weather_code&daily=temperature_2m_max,temperature_2m_min,weather_code&timezone=auto`;
 
     const response = await fetch(url);
     const data = await response.json();
@@ -411,16 +414,12 @@ async function loadWeather() {
 
       const high = Math.round(data.daily.temperature_2m_max[i]);
       const low = Math.round(data.daily.temperature_2m_min[i]);
-console.log("HIGH", HIGH, "LOW", LOW);
-      const weather = weatherCodes[code] || { text: "Weather", icon: "" };
+      const icon = weatherCodes[code] || "🌡️";
 
       document.getElementById(`weather-label-${i}`).textContent = labels[i];
-      document.getElementById(`weather-icon-${i}`).textContent = weather.icon;
+      document.getElementById(`weather-icon-${i}`).textContent = icon;
       document.getElementById(`weather-temp-${i}`).textContent = `${temp}°C`;
       document.getElementById(`weather-text-${i}`).textContent = `H:${high}° L:${low}°`;
-
-      const card = document.getElementById(`weather-card-${i}`);
-      card.classList.toggle("weather-alert", isWeatherAlert(code));
     }
   } catch (error) {
     console.error("Weather error:", error);
