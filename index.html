@@ -376,25 +376,25 @@ const WEATHER_LAT = 52.52;
 const WEATHER_LON = -1.90;
 
 const weatherCodes = {
-  0: "☀️",
-  1: "☀️",
-  2: "⛅",
-  3: "☁️",
-  45: "🌫️",
-  48: "🌫️",
-  51: "🌦️",
-  53: "🌦️",
-  55: "🌦️",
-  61: "🌧️",
-  63: "🌧️",
-  65: "🌧️",
-  71: "❄️",
-  73: "❄️",
-  75: "❄️",
-  80: "🌦️",
-  81: "🌦️",
-  82: "🌧️",
-  95: "⛈️"
+  0: { icon: "☀️", text: "Clear" },
+  1: { icon: "🌤️", text: "Clear" },
+  2: { icon: "⛅", text: "Cloudy" },
+  3: { icon: "☁️", text: "Cloudy" },
+  45: { icon: "🌫️", text: "Fog" },
+  48: { icon: "🌫️", text: "Fog" },
+  51: { icon: "🌦️", text: "Drizzle" },
+  53: { icon: "🌦️", text: "Drizzle" },
+  55: { icon: "🌦️", text: "Drizzle" },
+  61: { icon: "🌧️", text: "Rain" },
+  63: { icon: "🌧️", text: "Rain" },
+  65: { icon: "🌧️", text: "Heavy rain" },
+  71: { icon: "❄️", text: "Snow" },
+  73: { icon: "❄️", text: "Snow" },
+  75: { icon: "❄️", text: "Snow" },
+  80: { icon: "🌦️", text: "Showers" },
+  81: { icon: "🌦️", text: "Showers" },
+  82: { icon: "🌧️", text: "Showers" },
+  95: { icon: "⛈️", text: "Storm" }
 };
 
 async function loadWeather() {
@@ -408,20 +408,19 @@ async function loadWeather() {
 
     for (let i = 0; i < 3; i++) {
       const code = i === 0 ? data.current.weather_code : data.daily.weather_code[i];
+      const weather = weatherCodes[code] || { icon: "🌡️", text: "Weather" };
+
       const temp = i === 0
         ? Math.round(data.current.temperature_2m)
         : Math.round(data.daily.temperature_2m_max[i]);
 
       const high = Math.round(data.daily.temperature_2m_max[i]);
       const low = Math.round(data.daily.temperature_2m_min[i]);
-      const icon = weatherCodes[code] || "🌡️";
 
       document.getElementById(`weather-label-${i}`).textContent = labels[i];
-      document.getElementById(`weather-icon-${i}`).textContent = icon;
-      document.getElementById(`weather-temp-${i}`).textContent =
-    `${temp}°C (${high}°/${low}°)`;
-      document.getElementById(`weather-text-${i}`).textContent =
-    weather.text;
+      document.getElementById(`weather-icon-${i}`).textContent = weather.icon;
+      document.getElementById(`weather-temp-${i}`).textContent = `${temp}°C (${high}°/${low}°)`;
+      document.getElementById(`weather-text-${i}`).textContent = weather.text;
     }
   } catch (error) {
     console.error("Weather error:", error);
@@ -431,6 +430,3 @@ async function loadWeather() {
 loadWeather();
 setInterval(loadWeather, 30 * 60 * 1000);
 </script>
-</body>
-</html>
-
