@@ -409,6 +409,10 @@ if (i === 0) {
   dayBox.classList.add("today");
 }
 
+if (date.getDay() === 0 || date.getDay() === 6) {
+  dayBox.classList.add("weekend");
+}
+
             const heading = document.createElement("strong");
             heading.textContent =
                 date.toLocaleDateString("en-GB", {
