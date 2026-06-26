@@ -160,23 +160,71 @@
     }
 
     @media (max-width: 900px) {
-      .topbar {
-        grid-template-columns: 1fr 1fr;
-        grid-auto-rows: 90px;
-      }
 
-      .main {
-        grid-template-columns: 1fr;
-      }
+  body {
+    overflow: auto;
+    padding: 10px;
+  }
 
-      body {
-        overflow: auto;
-      }
+  .dashboard {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    gap: 12px;
+  }
 
-      .dashboard {
-        height: auto;
-      }
-    }
+  .topbar {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .main {
+    display: block;
+  }
+
+  .calendar-card {
+    margin-bottom: 12px;
+  }
+
+  .sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .sidebar .card {
+    max-height: none;
+  }
+
+  .sidebar .card > div {
+    max-height: 160px;
+    overflow-y: auto;
+  }
+
+  .calendar-grid {
+    grid-template-columns: repeat(14, calc((100% - 40px) / 5));
+    grid-template-rows: 1fr;
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+
+  .clock {
+    font-size: 1.7rem;
+  }
+
+  h2 {
+    font-size: 1.2rem;
+  }
+
+  .weather-temp {
+    font-size: 1.05rem;
+  }
+
+  .task-title {
+    font-size: 0.9rem;
+  }
+}
 .calendar-grid {
   display: grid;
   grid-template-columns: repeat(14, calc((100% - 40px) / 5));
