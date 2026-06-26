@@ -184,12 +184,12 @@
     display: none;
   }
 
-  .topbar #weather-card-0 {
-    display: block;
-    overflow-x: auto;
-    overflow-y: hidden;
-    white-space: nowrap;
-  }
+.topbar #weather-card-0 {
+  display: block;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+}
 
   .weather-icon {
     font-size: 1.7rem;
@@ -213,16 +213,18 @@
     grid-template-columns: repeat(14, calc((100% - 10px) / 2));
     grid-template-rows: 1fr;
     gap: 10px;
-    max-height: 300px;
+    max-height: 200px;
     overflow-x: auto;
     overflow-y: hidden;
     scroll-snap-type: x mandatory;
   }
 
-  .day {
-    min-height: 250px;
-    scroll-snap-align: start;
-  }
+.day {
+  min-height: 170px;
+  max-height: 170px;
+  overflow-y: auto;
+  scroll-snap-align: start;
+}
 
   .day:nth-child(6),
   .day:nth-child(7),
