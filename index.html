@@ -158,9 +158,13 @@
       margin-top: 4px;
       font-size: 1.05rem;
     }
+    
+         .mobile-weather-extra {
+  display: none;
+}
 
    @media (max-width: 900px) {
-
+     
   body {
     overflow: auto;
     padding: 10px;
@@ -180,17 +184,29 @@
     gap: 10px;
   }
 
-  .topbar .weather-card {
-    display: none;
-  }
+.topbar {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+}
 
-  .topbar #weather-card-0 {
-    display: block;
-    overflow-x: auto;
-    overflow-y: hidden;
-    white-space: nowrap;
-  }
+.topbar > .card:first-child {
+  flex: 0 0 80px;
+  height: 115px;
+  position: sticky;
+  left: 0;
+  z-index: 2;
+}
 
+.topbar .weather-card {
+  display: block;
+  flex: 0 0 calc(100% - 100px);
+  height: 115px;
+}
+
+.mobile-weather-extra {
+  display: block;
+}
   .weather-icon {
     font-size: 1.7rem;
     margin-bottom: 2px;
@@ -289,6 +305,34 @@
   <div class="weather-icon" id="weather-icon-2"></div>
   <div class="weather-temp" id="weather-temp-2">--°C</div>
   <div class="weather-text" id="weather-text-2">Loading...</div>
+</div>
+
+     <div class="card weather-card mobile-weather-extra" id="weather-card-3">
+  <div class="small-label" id="weather-label-3">Day 4</div>
+  <div class="weather-icon" id="weather-icon-3"></div>
+  <div class="weather-temp" id="weather-temp-3">--°C</div>
+  <div class="weather-text" id="weather-text-3">Loading...</div>
+</div>
+
+<div class="card weather-card mobile-weather-extra" id="weather-card-4">
+  <div class="small-label" id="weather-label-4">Day 5</div>
+  <div class="weather-icon" id="weather-icon-4"></div>
+  <div class="weather-temp" id="weather-temp-4">--°C</div>
+  <div class="weather-text" id="weather-text-4">Loading...</div>
+</div>
+
+<div class="card weather-card mobile-weather-extra" id="weather-card-5">
+  <div class="small-label" id="weather-label-5">Day 6</div>
+  <div class="weather-icon" id="weather-icon-5"></div>
+  <div class="weather-temp" id="weather-temp-5">--°C</div>
+  <div class="weather-text" id="weather-text-5">Loading...</div>
+</div>
+
+<div class="card weather-card mobile-weather-extra" id="weather-card-6">
+  <div class="small-label" id="weather-label-6">Day 7</div>
+  <div class="weather-icon" id="weather-icon-6"></div>
+  <div class="weather-temp" id="weather-temp-6">--°C</div>
+  <div class="weather-text" id="weather-text-6">Loading...</div>
 </div>
     </div>
     <div class="main">
@@ -498,7 +542,17 @@ async function loadWeather() {
     const response = await fetch(url);
     const data = await response.json();
 
-    const labels = ["Today", "Tomorrow", "Day After"];
+const labels = [
+  "Today",
+  "Tomorrow",
+  "Day 3",
+  "Day 4",
+  "Day 5",
+  "Day 6",
+  "Day 7"
+];
+
+for (let i = 0; i < 7; i++) {
 
     for (let i = 0; i < 3; i++) {
       const code = i === 0 ? data.current.weather_code : data.daily.weather_code[i];
