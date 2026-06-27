@@ -537,7 +537,7 @@ const weatherCodes = {
 
 async function loadWeather() {
   try {
-    const url = `https://api.open-meteo.com/v1/forecast?latitude=${WEATHER_LAT}&longitude=${WEATHER_LON}&current=temperature_2m,weather_code&daily=temperature_2m_max,temperature_2m_min,weather_code&timezone=auto`;
+    const url = `https://api.open-meteo.com/v1/forecast?latitude=${WEATHER_LAT}&longitude=${WEATHER_LON}&current=temperature_2m,weather_code&daily=temperature_2m_max,temperature_2m_min,weather_code&timezone=auto&forecast_days=7`;
 
     const response = await fetch(url);
     const data = await response.json();
@@ -552,7 +552,7 @@ const labels = [
   "Day 7"
 ];
 
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < 7; i++) {
       const code = i === 0 ? data.current.weather_code : data.daily.weather_code[i];
       const weather = weatherCodes[code] || { icon: "🌡️", text: "Weather" };
 
