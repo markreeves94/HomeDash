@@ -552,8 +552,6 @@ const labels = [
   "Day 7"
 ];
 
-for (let i = 0; i < 7; i++) {
-
     for (let i = 0; i < 3; i++) {
       const code = i === 0 ? data.current.weather_code : data.daily.weather_code[i];
       const weather = weatherCodes[code] || { icon: "🌡️", text: "Weather" };
